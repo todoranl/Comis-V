@@ -69,7 +69,7 @@ function TspVisualiser() {
           widthMinPixels: 4,
           transitions: {
             getColor: {
-              duration: 125,
+              duration: 10,
             },
           },
         }),
@@ -86,19 +86,19 @@ function TspVisualiser() {
     <Box as="section">
       <DeckGL
         initialViewState={viewport}
-        width="1080px"
-        height="550px"
+        width="100vw"
+        height="100vh"
         controller
         style={{ position: 'relative' }}
         layers={[pathLayer, capitals]}
       >
-        <StaticMap mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY} />
+        <StaticMap mapStyle="mapbox://styles/mapbox/dark-v10" mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY} />
       </DeckGL>
 
       <Flex
         justify="center"
         align="center"
-        style={{ gap: 10, width: 1080, marginTop: 15 }}
+        style={{ position: 'absolute', width: '100vw', top: 0 }}
       >
         <Select
           value={algo}
