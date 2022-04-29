@@ -14,12 +14,11 @@ const randomNearestNeighbour = () => {
 
   while (points.length > 0) {
     points.sort(
-      (a, b) =>
-        getDistanceFromCoords(
-          path[path.length - 1].geometry.coordinates,
-          b.geometry.coordinates,
-        ) -
-        getDistanceFromCoords(
+      (a, b) => getDistanceFromCoords(
+        path[path.length - 1].geometry.coordinates,
+        b.geometry.coordinates,
+      )
+        - getDistanceFromCoords(
           path[path.length - 1].geometry.coordinates,
           a.geometry.coordinates,
         ),

@@ -6,12 +6,11 @@ export const getInsertionCost = (previous, toInsert, next) => {
     previous.geometry.coordinates,
     next.geometry.coordinates,
   );
-  const costAfterInsertion =
-    getDistanceFromCoords(
-      previous.geometry.coordinates,
-      toInsert.geometry.coordinates,
-    ) +
-    getDistanceFromCoords(
+  const costAfterInsertion = getDistanceFromCoords(
+    previous.geometry.coordinates,
+    toInsert.geometry.coordinates,
+  )
+    + getDistanceFromCoords(
       toInsert.geometry.coordinates,
       next.geometry.coordinates,
     );

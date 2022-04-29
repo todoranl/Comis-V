@@ -1,1 +1,1 @@
-export { default } from './TspVisualizer';
+export { default as TspVisualiser } from './TspVisualizer';

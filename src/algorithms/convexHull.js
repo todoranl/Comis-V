@@ -60,16 +60,15 @@ export const convexHull = () => {
       path.forEach((pathPoint, pathPointIndex) => {
         const nextPathPoint = path[(pathPointIndex + 1) % path.length];
 
-        const evalCost =
-          getDistanceFromCoords(
-            pathPoint.geometry.coordinates,
-            basicPoint.geometry.coordinates,
-          ) +
-          getDistanceFromCoords(
+        const evalCost = getDistanceFromCoords(
+          pathPoint.geometry.coordinates,
+          basicPoint.geometry.coordinates,
+        )
+          + getDistanceFromCoords(
             basicPoint.geometry.coordinates,
             nextPathPoint.geometry.coordinates,
-          ) -
-          getDistanceFromCoords(
+          )
+          - getDistanceFromCoords(
             pathPoint.geometry.coordinates,
             nextPathPoint.geometry.coordinates,
           );
@@ -84,12 +83,11 @@ export const convexHull = () => {
         path[bestCostIndex].geometry.coordinates,
         nextPoint.geometry.coordinates,
       );
-      const newCost =
-        getDistanceFromCoords(
-          path[bestCostIndex].geometry.coordinates,
-          basicPoint.geometry.coordinates,
-        ) +
-        getDistanceFromCoords(
+      const newCost = getDistanceFromCoords(
+        path[bestCostIndex].geometry.coordinates,
+        basicPoint.geometry.coordinates,
+      )
+        + getDistanceFromCoords(
           basicPoint.geometry.coordinates,
           nextPoint.geometry.coordinates,
         );

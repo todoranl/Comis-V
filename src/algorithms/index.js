@@ -1,4 +1,3 @@
-
 export { default as nearestNeighbour } from './nearestNeighbour';
 export { default as nearestInsertion } from './nearestInsertion';
 export { default as farthestInsertion } from './farthestInsertion';
