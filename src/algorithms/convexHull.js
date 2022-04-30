@@ -1,55 +1,76 @@
-import usaCapitals from 'components/TspVisualizer/UsaCapitals';
 import { getDistanceFromCoords } from 'components/TspVisualizer/helpers';
 
-const orientation = (p, q, r) => {
-  const pX = Math.abs(p.geometry.coordinates[0]);
-  const pY = Math.abs(p.geometry.coordinates[1]);
-  const qX = Math.abs(q.geometry.coordinates[0]);
-  const qY = Math.abs(q.geometry.coordinates[1]);
-  const rX = Math.abs(r.geometry.coordinates[0]);
-  const rY = Math.abs(r.geometry.coordinates[1]);
-
-  const val = (qY - pY) * (rX - qX) - (qX - pX) * (rY - qY);
-  if (val === 0) {
-    return 0;
-  }
-
-  return val > 0 ? 1 : 2;
-};
-
-export const convexHull = () => {
-  const points = [...usaCapitals.features];
+export const convexHull = (capitals) => {
+  const points = [...capitals.features];
 
   let leftmostPoint = points[0];
 
+  // Find the leftmost point
   points.forEach((point) => {
-    if (point.geometry.coordinates[0] < leftmostPoint.geometry.coordinates[0]) {
+    if (point.geometry.coordinates[1] < leftmostPoint.geometry.coordinates[1]
+      || (point.geometry.coordinates[1] === leftmostPoint.geometry.coordinates[1]
+          && point.geometry.coordinates[0] < leftmostPoint.geometry.coordinates[0])) {
       leftmostPoint = point;
     }
   });
 
+  // Compute the Graham angle between the leftmost point and every other point
+  points.forEach((point) => {
+    // eslint-disable-next-line no-param-reassign
+    point.grahamAngle = Math.atan2(
+      point.geometry.coordinates[1] - leftmostPoint.geometry.coordinates[1],
+      point.geometry.coordinates[0] - leftmostPoint.geometry.coordinates[0],
+    );
+  });
+
+  // Sort the points based on the graham angle
+  points.sort((a, b) => (a.grahamAngle === b.grahamAngle
+    ? a.geometry.coordinates[0] - b.geometry.coordinates[0]
+    : a.grahamAngle - b.grahamAngle));
+
   const path = [leftmostPoint];
+  let len = 1;
+
   const pathAnimation = [[...path]];
 
-  while (true) {
-    const currentPoint = path[path.length - 1];
-    let [selectedIndex, selected] = [0, null];
+  // Find the convex hull
 
-    points.forEach((point, pointIndex) => {
-      if (!selected || orientation(currentPoint, point, selected) === 2) {
-        [selectedIndex, selected] = [pointIndex, point];
-      }
-    });
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i < points.length; i++) {
+    let a = path[len - 2];
+    let b = path[len - 1];
+    const c = points[i];
 
-    points.splice(selectedIndex, 1);
-
-    if (selected.properties.state === leftmostPoint.properties.state) {
-      break;
+    while
+    // (
+    //   (len === 1 && b.geometry.coordinates[0] === c.geometry.coordinates[0])
+    //     || (len > 1
+    //       && (b.geometry.coordinates[0] - a.geometry.coordinates[0])
+    //           * (c.geometry.coordinates[1] - a.geometry.coordinates[1])
+    //       <= (b.geometry.coordinates[1] - a.geometry.coordinates[1])
+    //           * (c.geometry.coordinates[0] - a.geometry.coordinates[0]))
+    // )
+    ((len === 1
+      && b.geometry.coordinates[0] === c.geometry.coordinates[0]
+      && b.geometry.coordinates[1] === c.geometry.coordinates[1])
+    || (len > 1
+      && (b.geometry.coordinates[0] - a.geometry.coordinates[0])
+      * (c.geometry.coordinates[1] - a.geometry.coordinates[1])
+      <= (b.geometry.coordinates[1] - a.geometry.coordinates[1])
+      * (c.geometry.coordinates[0] - a.geometry.coordinates[0]))) {
+      // eslint-disable-next-line no-plusplus
+      len--;
+      b = a;
+      a = path[len - 2];
     }
 
-    path.push(selected);
+    // eslint-disable-next-line no-plusplus
+    path[len++] = c;
     pathAnimation.push([...path]);
   }
+
+  path.push(path[0]);
+  pathAnimation.push([...path]);
 
   while (points.length > 0) {
     let [bestRatio, bestPointIndex, insertIndex] = [Infinity, null, 0];
@@ -108,7 +129,6 @@ export const convexHull = () => {
     pathAnimation.push([...path]);
   }
 
-  path.push(path[0]);
   pathAnimation.push([...path]);
 
   return pathAnimation;

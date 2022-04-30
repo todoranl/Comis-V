@@ -1,9 +1,8 @@
-import usaCapitals from 'components/TspVisualizer/UsaCapitals';
 import { randomIntFromInterval } from 'shared/variables';
 import { computeCost } from './helpers';
 
-const randomInsertion = () => {
-  const points = [...usaCapitals.features];
+const randomInsertion = (capitals) => {
+  const points = [...capitals.features];
 
   const randomIndex = Math.floor(Math.random() * points.length);
   const randomItem = points[randomIndex];

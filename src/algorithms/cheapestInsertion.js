@@ -1,8 +1,7 @@
-import usaCapitals from 'components/TspVisualizer/UsaCapitals';
 import { getInsertionCost } from './helpers';
 
-const cheapestInsertion = () => {
-  const points = [...usaCapitals.features];
+const cheapestInsertion = (capitals) => {
+  const points = [...capitals.features];
 
   const randomIndex = Math.floor(Math.random() * points.length);
   const randomItem = points[randomIndex];

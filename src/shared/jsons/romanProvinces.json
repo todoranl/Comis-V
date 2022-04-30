@@ -1,0 +1,481 @@
+{
+	"type": "FeatureCollection",
+	"features": [{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [-1.7622257445911487, 52.399001050702566]
+		},
+		"properties": {
+			"capital": "Britannia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [0.5913524521876639, 48.5093668152806]
+		},
+		"properties": {
+			"capital": "Lugdunensis"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [4.2563555333318845, 49.3413754198628]
+		},
+		"properties": {
+			"capital": "Belgica"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [5.498884217981185, 51.01273962450301]
+		},
+		"properties": {
+			"capital": "Germania Inferior"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [1.0321518211313219, 45.38185013169817]
+		},
+		"properties": {
+			"capital": "Aquitania"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [7.487013831539002, 48.0956427869354]
+		},
+		"properties": {
+			"capital": "Germania Superior"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [7.105067881681634, 45.78097962278474]
+		},
+		"properties": {
+			"capital": "Alpes Graiae et Poeninae"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [8.92068633706964, 45.81096956592239]
+		},
+		"properties": {
+			"capital": "XI. Transpadana"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [7.023059602345143, 44.87849446806757]
+		},
+		"properties": {
+			"capital": "Alpes Cottiae"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [7.132736115576108, 44.142852076670806]
+		},
+		"properties": {
+			"capital": "Alpes Maritimae"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [8.392951255985679, 44.54586802258325]
+		},
+		"properties": {
+			"capital": "IX. Liguria"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [5.590231440295213, 44.408077968163695]
+		},
+		"properties": {
+			"capital": "Narbonensis"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [-3.0588515800533287, 41.0237574025183]
+		},
+		"properties": {
+			"capital": "Tarraconensis"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [-5.004550433540658, 37.6199196737478]
+		},
+		"properties": {
+			"capital": "Baetica"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [-6.868209920901734, 39.90128836416807]
+		},
+		"properties": {
+			"capital": "Lusitania"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [10.935485583770856, 48.16799813760815]
+		},
+		"properties": {
+			"capital": "Raetia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [13.985070695778745, 47.35144794545573]
+		},
+		"properties": {
+			"capital": "Noricum"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [11.097225851903033, 45.94001695313699]
+		},
+		"properties": {
+			"capital": "X. Venetia et Histria"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [10.989376387544326, 44.60194016544301]
+		},
+		"properties": {
+			"capital": "VIII. Aemilia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [11.34906111319225, 43.20666805410684]
+		},
+		"properties": {
+			"capital": "VII. Etruria"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [12.640852150926435, 43.35102189667549]
+		},
+		"properties": {
+			"capital": "VI. Umbria et Ager Gallicus"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [13.765747389779335, 42.09749107758893]
+		},
+		"properties": {
+			"capital": "IV. Samnium"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [13.634181521789515, 42.970706518388454]
+		},
+		"properties": {
+			"capital": "V. Picenum"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [13.679769363379535, 41.51315925651147]
+		},
+		"properties": {
+			"capital": "I. Latium et Campania"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [16.65918488020742, 39.22044517867806]
+		},
+		"properties": {
+			"capital": "III. Lucania et Bruttium"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [14.175211425024315, 37.594280979639905]
+		},
+		"properties": {
+			"capital": "Sicilia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [16.859063686612558, 46.257601431825606]
+		},
+		"properties": {
+			"capital": "Pannonia Superior"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [19.108785528330145, 44.947711552450585]
+		},
+		"properties": {
+			"capital": "Pannonia Inferior"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [18.005702968934713, 43.737165067127705]
+		},
+		"properties": {
+			"capital": "Dalmatia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [15.529303387214782, 41.36203302390351]
+		},
+		"properties": {
+			"capital": "II. Apulia et Calabria"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [9.037586855195457, 40.0837418398213]
+		},
+		"properties": {
+			"capital": "Sardinia et Corsica"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [21.51964233667144, 43.360382021140595]
+		},
+		"properties": {
+			"capital": "Moesia Superior"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [23.85055989643945, 45.82351771704003]
+		},
+		"properties": {
+			"capital": "Dacia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [26.47018122274818, 43.63208316082199]
+		},
+		"properties": {
+			"capital": "Moesia Inferior"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [25.55067590636753, 42.03336915237253]
+		},
+		"properties": {
+			"capital": "Thracia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [21.772535911491048, 40.98923239107256]
+		},
+		"properties": {
+			"capital": "Macedonia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [20.523363372937524, 39.737389293973365]
+		},
+		"properties": {
+			"capital": "Achaia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [32.32264908129804, 41.02492406613152]
+		},
+		"properties": {
+			"capital": "Bithynia et Pontus"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [34.12222940393019, 36.87969187915871]
+		},
+		"properties": {
+			"capital": "Cilicia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [20.831328987586403, 29.99684018276656]
+		},
+		"properties": {
+			"capital": "Creta et Cyrene"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [33.25119938085663, 35.057750791220656]
+		},
+		"properties": {
+			"capital": "Cyprus"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [28.390213733068038, 29.652639569981318]
+		},
+		"properties": {
+			"capital": "Aegyptus"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [33.63791856082031, 29.438194910384993]
+		},
+		"properties": {
+			"capital": "Arabia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [35.15953541812661, 31.942147894677646]
+		},
+		"properties": {
+			"capital": "Iudaea"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [36.995647566197476, 35.2936657843166]
+		},
+		"properties": {
+			"capital": "Syria"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [13.275419069701627, 31.780632772829392]
+		},
+		"properties": {
+			"capital": "Africa Proconsularis"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [7.248768575424322, 35.028114090219105]
+		},
+		"properties": {
+			"capital": "Numidia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [2.129999185743486, 35.182760883970275]
+		},
+		"properties": {
+			"capital": "Mauretania Caesariensis"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [-4.7893430892016795, 34.69079152494163]
+		},
+		"properties": {
+			"capital": "Mauretania Tingitana"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [35.2828794078311, 39.27359519650656]
+		},
+		"properties": {
+			"capital": "Galatia et Cappadocia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [30.44215862783352, 37.132614784248176]
+		},
+		"properties": {
+			"capital": "Lycia et Pamphylia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [28.775341635872564, 38.857868996785214]
+		},
+		"properties": {
+			"capital": "Asia"
+		}
+	}, {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [40.8185207137405, 38.10300081266615]
+		},
+		"properties": {
+			"capital": "Armenia Mesopotamia"
+		}
+	}]
+}

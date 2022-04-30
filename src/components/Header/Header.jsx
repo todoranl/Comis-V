@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/layout';
+import { Box, Flex } from '@chakra-ui/layout';
 import { Select, Button, Image } from '@chakra-ui/react';
 import React from 'react';
 
@@ -11,26 +11,34 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
-  nearestNeighbour,
-  nearestInsertion,
-  randomInsertion,
-  farthestInsertion,
-  cheapestInsertion,
-  twoOpt,
-  convexHull,
-} from 'algorithms';
+  africaViewport,
+  asianViewport,
+  europeViewport,
+  romeViewport,
+  southAmericaViewport,
+  usaViewport,
+} from 'components/TspVisualizer/viewports';
 import { TSP } from 'algorithms/constants';
+
+import romanProvinces from 'shared/jsons/romanProvinces';
+import africanCapitals from 'shared/jsons/africanCapitals';
+import europeanCapitals from 'shared/jsons/europeanCapitals';
+import usaCapitals from 'shared/jsons/usaCapitals';
+import southAmericanCapitals from 'shared/jsons/southAmericanCapitals';
+import asianCapitals from 'shared/jsons/asianCapitals';
+
 import githubLogo from 'images/githubLogo.svg';
 
 function Header({
-  algo, distance, delay, setters, pathAnimation,
+  algo, capitals, distance, delay, setters, pathAnimation,
 }) {
   const {
     setPathLayer,
+    setViewport,
+    setCapitals,
     setDelay,
     setTimestamp,
     setDistance,
-    setPathAnimation,
     setAlgo,
     onOpen,
   } = setters;
@@ -43,10 +51,10 @@ function Header({
       backgroundColor="#F0F0F0"
     >
       <Flex
-        gap="15px"
+        gap="10px"
         justify="center"
         align="center"
-        width="1080px"
+        maxWidth="1440px"
         padding="10px"
       >
         <a href="https://github.com/razvanborsan" target="_blank" rel="noreferrer">
@@ -58,7 +66,7 @@ function Header({
         </a>
         <Select
           value={algo}
-          width="400px"
+          width="500px"
           backgroundColor="#FFF"
           onChange={(e) => {
             setPathLayer();
@@ -66,31 +74,6 @@ function Header({
             setTimestamp(0);
             setDistance(0);
             setAlgo(e.target.value);
-            switch (e.target.value) {
-              case TSP.NEAREST_NEIGHBOUR:
-                setPathAnimation(nearestNeighbour());
-                break;
-              case TSP.NEAREST_INSERTION:
-                setPathAnimation(nearestInsertion());
-                break;
-              case TSP.CHEAPEST_INSERTION:
-                setPathAnimation(cheapestInsertion());
-                break;
-              case TSP.FARTHEST_INSERTION:
-                setPathAnimation(farthestInsertion());
-                break;
-              case TSP.RANDOM_INSERTION:
-                setPathAnimation(randomInsertion());
-                break;
-              case TSP.CONVEX_HULL:
-                setPathAnimation(convexHull());
-                break;
-              case TSP.TWO_OPT:
-                setPathAnimation(twoOpt());
-                break;
-              default:
-                break;
-            }
           }}
         >
           <option value={TSP.NEAREST_NEIGHBOUR}>Nearest Neighbour</option>
@@ -109,7 +92,7 @@ function Header({
         <Button
           colorScheme="teal"
           onClick={() => {
-            setDelay(75);
+            setDelay(80);
           }}
         >
           <FontAwesomeIcon icon={faPlayCircle} />
@@ -132,52 +115,85 @@ function Header({
             setDelay();
             setTimestamp(0);
             setDistance(0);
-
-            switch (algo) {
-              case TSP.NEAREST_NEIGHBOUR:
-                setPathAnimation(nearestNeighbour());
-                break;
-              case TSP.NEAREST_INSERTION:
-                setPathAnimation(nearestInsertion());
-                break;
-              case TSP.CHEAPEST_INSERTION:
-                setPathAnimation(cheapestInsertion());
-                break;
-              case TSP.FARTHEST_INSERTION:
-                setPathAnimation(farthestInsertion());
-                break;
-              case TSP.RANDOM_INSERTION:
-                setPathAnimation(randomInsertion());
-                break;
-              case TSP.CONVEX_HULL:
-                setPathAnimation(convexHull());
-                break;
-              case TSP.TWO_OPT:
-                setPathAnimation(twoOpt());
-                break;
-              default:
-                break;
-            }
           }}
         >
           <FontAwesomeIcon icon={faRedoAlt} />
         </Button>
 
-        <Flex justify="center" align="center" style={{ width: 400 }}>
-          Distance:
-          {' '}
-          {Math.floor(distance)}
-          {' '}
-          km
+        <Flex
+          justify="center"
+          align="center"
+          style={{ width: 600 }}
+          gap="30px"
+        >
+          <Box>
+            Total places:
+            {' '}
+            {capitals?.features?.length}
+          </Box>
+          <Box width="150px">
+            Distance:
+            {' '}
+            {Math.floor(distance)}
+            {' '}
+            km
+          </Box>
         </Flex>
+
+        <Select
+          backgroundColor="#FFF"
+          width="500px"
+          onChange={(e) => {
+            setPathLayer();
+            setDelay();
+            setTimestamp(0);
+            setDistance(0);
+            switch (e.target.value) {
+              case 'ROME':
+                setViewport(romeViewport);
+                setCapitals(romanProvinces);
+                break;
+              case 'AFRICA':
+                setViewport(africaViewport);
+                setCapitals(africanCapitals);
+                break;
+              case 'EUROPE':
+                setViewport(europeViewport);
+                setCapitals(europeanCapitals);
+                break;
+              case 'SOUTH_AMERICA':
+                setViewport(southAmericaViewport);
+                setCapitals(southAmericanCapitals);
+                break;
+              case 'ASIA':
+                setViewport(asianViewport);
+                setCapitals(asianCapitals);
+                break;
+              case 'USA':
+              default:
+                setViewport(usaViewport);
+                setCapitals(usaCapitals);
+                break;
+            }
+          }}
+        >
+          <option value="USA">United States of America</option>
+          <option value="ROME">The Roman Empire</option>
+          <option value="EUROPE">Europe</option>
+          <option value="AFRICA">Africa</option>
+          <option value="SOUTH_AMERICA">South America</option>
+          <option value="ASIA">Asia</option>
+        </Select>
 
         <Flex justify="center" align="center" style={{ width: 650 }}>
           Start location:
           {' '}
-          {pathAnimation?.[0]?.[0]?.properties?.name}
-          ,
+          {pathAnimation?.[0]?.[0]?.properties?.capital}
+          {(pathAnimation?.[0]?.[0]?.properties?.state
+          || pathAnimation?.[0]?.[0]?.properties?.country) && ','}
           {' '}
-          {pathAnimation?.[0]?.[0]?.properties?.state}
+          {pathAnimation?.[0]?.[0]?.properties?.state
+          || pathAnimation?.[0]?.[0]?.properties?.country}
         </Flex>
       </Flex>
     </Flex>

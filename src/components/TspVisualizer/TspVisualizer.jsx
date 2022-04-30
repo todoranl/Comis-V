@@ -6,29 +6,43 @@ import { Box } from '@chakra-ui/layout';
 import { useDisclosure } from '@chakra-ui/react';
 
 import { Header } from 'components/Header';
-import { nearestNeighbour } from 'algorithms';
 import { TSP } from 'algorithms/constants';
 import { totalPathCost } from 'algorithms/helpers';
 import useInterval from 'hooks/useInterval';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { getUSACapitals, usaViewport } from './constants';
+import {
+  nearestNeighbour,
+  nearestInsertion,
+  randomInsertion,
+  farthestInsertion,
+  cheapestInsertion,
+  twoOpt,
+  convexHull,
+} from 'algorithms';
+
+import usaCapitals from 'shared/jsons/usaCapitals';
+import { getCapitalsGeoJSON, getStartingPointLayer } from './constants';
+import { usaViewport } from './viewports';
 import AlgoInfoModal from '../AlgoInfoModal/AlgoInfoModal';
 
 function TspVisualiser() {
-  const [viewport] = useState(usaViewport);
+  const [viewport, setViewport] = useState(usaViewport);
+  const [capitals, setCapitals] = useState(usaCapitals);
   const [pathLayer, setPathLayer] = useState();
-  const [capitals, setCapitals] = useState();
+  const [capitalsGeoJsonLayer, setCapitalsGeoJsonLayer] = useState();
   const [delay, setDelay] = useState();
   const [timestamp, setTimestamp] = useState(0);
   const [distance, setDistance] = useState(0);
-  const [pathAnimation, setPathAnimation] = useState(nearestNeighbour());
+  const [pathAnimation, setPathAnimation] = useState(nearestNeighbour(capitals));
   const [algo, setAlgo] = useState(TSP.NEAREST_NEIGHBOUR);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const setters = {
     setPathLayer,
+    setViewport,
+    setCapitals,
     setDelay,
     setTimestamp,
     setDistance,
@@ -38,8 +52,43 @@ function TspVisualiser() {
   };
 
   useEffect(() => {
-    setCapitals(getUSACapitals());
-  }, []);
+    switch (algo) {
+      case TSP.NEAREST_NEIGHBOUR:
+        setPathAnimation(nearestNeighbour(capitals));
+        break;
+      case TSP.NEAREST_INSERTION:
+        setPathAnimation(nearestInsertion(capitals));
+        break;
+      case TSP.CHEAPEST_INSERTION:
+        setPathAnimation(cheapestInsertion(capitals));
+        break;
+      case TSP.FARTHEST_INSERTION:
+        setPathAnimation(farthestInsertion(capitals));
+        break;
+      case TSP.RANDOM_INSERTION:
+        setPathAnimation(randomInsertion(capitals));
+        break;
+      case TSP.CONVEX_HULL:
+        setPathAnimation(convexHull(capitals));
+        break;
+      case TSP.TWO_OPT:
+        setPathAnimation(twoOpt(capitals));
+        break;
+      default:
+        break;
+    }
+  }, [algo, capitals]);
+
+  useEffect(() => {
+    const layer = getCapitalsGeoJSON({
+      ...capitals,
+      features: capitals.features.filter(
+        (city) => city.properties.capital !== pathAnimation?.[0]?.[0].properties.capital,
+      ),
+    });
+
+    setCapitalsGeoJsonLayer(layer);
+  }, [capitals, pathAnimation]);
 
   useInterval(() => {
     if (!pathAnimation[timestamp]) {
@@ -82,6 +131,11 @@ function TspVisualiser() {
     }
   }, delay || null);
 
+  const startingPointLayer = getStartingPointLayer({
+    type: 'FeatureCollection',
+    features: [pathAnimation?.[0]?.[0]],
+  });
+
   return (
     <Box as="section">
       <DeckGL
@@ -90,7 +144,7 @@ function TspVisualiser() {
         height="100vh"
         controller
         style={{ position: 'relative' }}
-        layers={[pathLayer, capitals]}
+        layers={[startingPointLayer, capitalsGeoJsonLayer, pathLayer]}
       >
         <StaticMap
           mapStyle="mapbox://styles/mapbox/dark-v10"
@@ -106,6 +160,7 @@ function TspVisualiser() {
 
       <Header
         algo={algo}
+        capitals={capitals}
         distance={distance}
         delay={delay}
         pathAnimation={pathAnimation}
