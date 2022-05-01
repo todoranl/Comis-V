@@ -15,7 +15,7 @@ I used React with Chakra UI for the interface and deck.gl for the map. The algor
 
 ### Run locally
 
-If you want to play around with the project locally, cloning it + npm install + npm start should suffice.
+If you want to play around with the project locally, cloning it + `npm install` + `npm start` should suffice.
 
 
 ## Why did you add a map of the Roman Empire?
