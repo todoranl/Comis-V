@@ -5,6 +5,10 @@ Given a list of cities and the distances between each pair of cities, what is th
 ## Deployed App
 You can play with the deployed app [here](https://razvanborsan.github.io/tsp-visualizer/). The red dots represent cities or provinces; the yellow dot is the current starting point (the origin city mentioned earlier). 
 
+Preview:
+
+![Imgur](https://i.imgur.com/SExAREk.gif)
+
 ### Tech stack
 
 I used React with Chakra UI for the interface and deck.gl for the map. The algorithms themselves are written in plain JavaScript.
