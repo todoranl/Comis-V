@@ -5,10 +5,6 @@ Given a list of cities and the distances between each pair of cities, what is th
 ## Deployed App
 You can play with the deployed app [here](https://razvanborsan.github.io/tsp-visualizer/). The red dots represent cities or provinces; the yellow dot is the current starting point (the origin city mentioned earlier). 
 
-## Why did you add a map of the Roman Empire?
-
-Reading history is one of my hobbies and the history of Rome never fails to pique my interest; I thought it a fun little thing to add the roman provinces next to the USA and all the continents, just to see if all roads do, indeed, lead to Rome.
-
 ### Tech stack
 
 I used React with Chakra UI for the interface and deck.gl for the map. The algorithms themselves are written in plain JavaScript.
@@ -16,3 +12,8 @@ I used React with Chakra UI for the interface and deck.gl for the map. The algor
 ### Run locally
 
 If you want to play around with the project, cloning it + npm install + npm start should suffice.
+
+
+## Why did you add a map of the Roman Empire?
+
+Reading history is one of my hobbies and the history of Rome never fails to pique my interest; I thought it a fun little thing to add the roman provinces next to the USA and all the continents, just to see if all roads do, indeed, lead to Rome.
