@@ -7,7 +7,7 @@ You can play with the deployed app [here](https://razvanborsan.github.io/tsp-vis
 
 Preview:
 
-![Imgur](https://i.imgur.com/SExAREk.gif)
+![tsp-visualizer](https://user-images.githubusercontent.com/22635895/166138730-2302344a-5f5f-44ce-91c9-1151f6b5f9b5.gif)
 
 ### Tech stack
 
