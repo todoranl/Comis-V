@@ -11,9 +11,9 @@ I used React with Chakra UI for the interface and deck.gl for the map. The algor
 
 ### Run locally
 
-If you want to play around with the project, cloning it + npm install + npm start should suffice.
+If you want to play around with the project locally, cloning it + npm install + npm start should suffice.
 
 
 ## Why did you add a map of the Roman Empire?
 
-Reading history is one of my hobbies and the history of Rome never fails to pique my interest; I thought it a fun little thing to add the roman provinces next to the USA and all the continents, just to see if all roads do, indeed, lead to Rome.
+Reading history is one of my hobbies and the history of Rome has never failed to pique my interest; I thought it a fun little thing to add the roman provinces next to the USA and all the continents, just to see if all roads do, indeed, lead to Rome.
