@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DeckGL from 'deck.gl';
-import StaticMap from 'react-map-gl';
+import { StaticMap } from 'react-map-gl';
 import { PathLayer } from '@deck.gl/layers';
 import { Box } from '@chakra-ui/layout';
 import { useDisclosure } from '@chakra-ui/react';
@@ -27,6 +27,8 @@ import { getCapitalsGeoJSON, getStartingPointLayer } from './constants';
 import { usaViewport } from './viewports';
 import AlgoInfoModal from '../AlgoInfoModal/AlgoInfoModal';
 
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_API_KEY;
+
 function TspVisualiser() {
   const [viewport, setViewport] = useState(usaViewport);
   const [capitals, setCapitals] = useState(usaCapitals);
@@ -38,6 +40,7 @@ function TspVisualiser() {
   const [pathAnimation, setPathAnimation] = useState(nearestNeighbour(capitals));
   const [algo, setAlgo] = useState(TSP.NEAREST_NEIGHBOUR);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11'); // Default style
 
   const setters = {
     setPathLayer,
@@ -137,18 +140,29 @@ function TspVisualiser() {
   });
 
   return (
-    <Box as="section">
+    <Box as="section" style={{ position: 'relative', height: '100vh' }}>
+      <Box style={{ position: 'absolute', top: 20, left: 10, zIndex: 10, background: 'white', padding: '5px', borderRadius: '5px', width: '120px' }}>
+        <select onChange={(e) => setMapStyle(e.target.value)} style={{ padding: '5px', fontSize: '16px' }}>
+          <option value="mapbox://styles/mapbox/streets-v11">Streets</option>
+          <option value="mapbox://styles/mapbox/outdoors-v11">Outdoor</option>
+          <option value="mapbox://styles/mapbox/light-v10">Light</option>
+          <option value="mapbox://styles/mapbox/dark-v10">Dark</option>
+          <option value="mapbox://styles/mapbox/satellite-v9">Satellite</option>
+          <option value="mapbox://styles/mapbox/satellite-streets-v11">Satellite Streets</option>
+          <option value="mapbox://styles/mapbox/navigation-day-v1">Navigation Day</option>
+          <option value="mapbox://styles/mapbox/navigation-night-v1">Navigation Night</option>
+        </select>
+      </Box>
+
       <DeckGL
         initialViewState={viewport}
-        width="100vw"
-        height="100vh"
         controller
-        style={{ position: 'relative' }}
+        style={{ position: 'relative', width: '100%', height: '100%' }}
         layers={[startingPointLayer, capitalsGeoJsonLayer, pathLayer]}
       >
         <StaticMap
-          mapStyle="mapbox://styles/mapbox/dark-v10"
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
+          mapStyle={mapStyle}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
         />
       </DeckGL>
 
