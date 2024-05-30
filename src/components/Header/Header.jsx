@@ -57,13 +57,7 @@ function Header({
         maxWidth="1440px"
         padding="10px"
       >
-        <a href="https://github.com/razvanborsan" target="_blank" rel="noreferrer">
-          <Image
-            src={githubLogo}
-            alt="Github icon"
-            boxSize="60px"
-          />
-        </a>
+       
         <Select
           value={algo}
           width="500px"
@@ -76,7 +70,7 @@ function Header({
             setAlgo(e.target.value);
           }}
         >
-          <option value={TSP.NEAREST_NEIGHBOUR}>Nearest Neighbour</option>
+          <option value={TSP.NEAREST_NEIGHBOUR}>Metoda Clasica - euclidiana</option>
           <option value={TSP.NEAREST_INSERTION}>Nearest Insertion</option>
           <option value={TSP.FARTHEST_INSERTION}>Farthest Insertion</option>
           <option value={TSP.CHEAPEST_INSERTION}>Cheapest Insertion</option>

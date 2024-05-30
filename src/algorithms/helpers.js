@@ -1,47 +1,50 @@
-/* eslint-disable import/prefer-default-export */
-import { getDistanceFromCoords } from 'components/TspVisualizer/helpers';
+export function getDistanceFromCoords(pointACoords, pointBCoords) {
+  const lat1 = pointACoords[1];
+  const lon1 = pointACoords[0];
+  const lat2 = pointBCoords[1];
+  const lon2 = pointBCoords[0];
 
-export const getInsertionCost = (previous, toInsert, next) => {
-  const costBeforeInsertion = getDistanceFromCoords(
-    previous.geometry.coordinates,
-    next.geometry.coordinates,
-  );
-  const costAfterInsertion = getDistanceFromCoords(
-    previous.geometry.coordinates,
-    toInsert.geometry.coordinates,
-  )
-    + getDistanceFromCoords(
-      toInsert.geometry.coordinates,
-      next.geometry.coordinates,
-    );
+  const R = 6371e3; // metres
+  const pi = 0.017453292519943295; // Math.PI / 180
 
-  return costAfterInsertion - costBeforeInsertion;
-};
+  const theta1 = lat1 * pi;
+  const theta2 = lat2 * pi;
+  const deltaTheta = (lat2 - lat1) * pi;
+  const deltaYamcha = (lon2 - lon1) * pi;
 
-export const computeCost = (path, nextPoint) => {
-  let [bestCost, bestPointIndex] = [Infinity, null];
+  const a = Math.sin(deltaTheta / 2) * Math.sin(deltaTheta / 2)
+    + Math.cos(theta1) * Math.cos(theta2) * Math.sin(deltaYamcha / 2) * Math.sin(deltaYamcha / 2);
 
-  for (let i = 1; i < path.length; i += 1) {
-    const insertionCost = getInsertionCost(path[i - 1], nextPoint, path[i]);
-    if (insertionCost < bestCost) {
-      [bestCost, bestPointIndex] = [insertionCost, i];
-    }
-  }
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-  return bestPointIndex;
-};
+  return (R * c) / 1000;
+}
 
-export const totalPathCost = (path) => {
-  let distance = 0;
+export function computeCost() {
+  // Implementare...
+}
 
-  path.forEach((point, pointIndex) => {
-    if (pointIndex > 0) {
-      distance += getDistanceFromCoords(
-        path[pointIndex - 1].geometry.coordinates,
-        path[pointIndex].geometry.coordinates,
-      );
+export function getInsertionCost() {
+  // Implementare...
+}
+
+export function totalPathCost(path) {
+  let totalCost = 0;
+
+  path.forEach((point, index) => {
+    if (index < path.length - 1 && point.geometry && point.geometry.coordinates) {
+      const currentPoint = point.geometry.coordinates;
+      const nextPoint = path[index + 1].geometry.coordinates;
+      totalCost += getDistanceFromCoords(currentPoint, nextPoint);
     }
   });
 
-  return distance;
-};
+  // Adaugă distanța de întoarcere la punctul de start
+  if (path.length > 1 && path[0].geometry && path[0].geometry.coordinates && path[path.length - 1].geometry && path[path.length - 1].geometry.coordinates) {
+    const startPoint = path[0].geometry.coordinates;
+    const endPoint = path[path.length - 1].geometry.coordinates;
+    totalCost += getDistanceFromCoords(endPoint, startPoint);
+  }
+
+  return totalCost;
+}

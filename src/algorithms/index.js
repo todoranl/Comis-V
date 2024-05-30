@@ -1,7 +1,19 @@
-export { default as nearestNeighbour } from './nearestNeighbour';
-export { default as nearestInsertion } from './nearestInsertion';
-export { default as farthestInsertion } from './farthestInsertion';
-export { default as cheapestInsertion } from './cheapestInsertion';
-export { default as randomInsertion } from './randomInsertion';
-export { default as convexHull } from './convexHull';
-export { default as twoOpt } from './twoOpt';
+import nearestNeighbour from './clasicEuclidian';
+import tspBacktracking from './tspBacktracking';
+import nearestInsertion from './nearestInsertion';
+import randomInsertion from './randomInsertion';
+import farthestInsertion from './farthestInsertion';
+import cheapestInsertion from './cheapestInsertion';
+import twoOpt from './twoOpt';
+import convexHull from './convexHull';
+
+export {
+  nearestNeighbour,
+  tspBacktracking,
+  nearestInsertion,
+  randomInsertion,
+  farthestInsertion,
+  cheapestInsertion,
+  twoOpt,
+  convexHull
+};
