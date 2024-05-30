@@ -1,41 +1,44 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/react';
 import React from 'react';
-import { Container, Text } from '@chakra-ui/layout';
-import algorithmDescription from './constants';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from '@chakra-ui/react';
 
-const normalizeAlgorithmName = (name) => name.toLowerCase().split('_').map((word) => word[0].toUpperCase() + word.slice(1)).join(' ');
+const AlgoInfoModal = ({ isOpen, onClose, algo }) => {
+  if (!algo) {
+    return null; // Sau poți afișa un mesaj de încărcare
+  }
 
-function AlgoInfoModal({ isOpen, onClose, algo }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{normalizeAlgorithmName(algo)}</ModalHeader>
-        <ModalCloseButton colorScheme="teal" />
+        <ModalHeader>Algorithm Information</ModalHeader>
+        <ModalCloseButton />
         <ModalBody>
-          {algorithmDescription[algo].map((paragraph) => (
-            <Container key={paragraph.id} size="6xl" marginBottom="15px">
-              <Text>{paragraph.text}</Text>
-            </Container>
-          ))}
+          <p>{algo.description}</p>
+          {algo.steps && (
+            <ul>
+              {algo.steps.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
+            </ul>
+          )}
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="teal" mr={3} onClick={onClose}>
+          <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default AlgoInfoModal;

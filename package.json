@@ -6,7 +6,7 @@
   "dependencies": {
     "@chakra-ui/layout": "^1.7.7",
     "@chakra-ui/react": "^1.8.6",
-    "@craco/craco": "^6.4.3",
+    "@craco/craco": "^6.4.5",
     "@deck.gl/layers": "^8.7.0",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",

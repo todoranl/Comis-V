@@ -6,8 +6,8 @@ import { Box } from '@chakra-ui/layout';
 import { useDisclosure } from '@chakra-ui/react';
 
 import { Header } from 'components/Header';
-import { TSP } from 'algorithms/constants';
-import { totalPathCost } from 'algorithms/helpers';
+import { TSP } from '../../algorithms/constants';
+import { totalPathCost } from '../../algorithms/helpers';
 import useInterval from 'hooks/useInterval';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -20,7 +20,8 @@ import {
   cheapestInsertion,
   twoOpt,
   convexHull,
-} from 'algorithms';
+  tspBacktracking,
+} from '../../algorithms';
 
 import usaCapitals from 'shared/jsons/usaCapitals';
 import { getCapitalsGeoJSON, getStartingPointLayer } from './constants';
@@ -29,7 +30,8 @@ import AlgoInfoModal from '../AlgoInfoModal/AlgoInfoModal';
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_API_KEY;
 
-function TspVisualiser() {
+function TspVisualizer() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [viewport, setViewport] = useState(usaViewport);
   const [capitals, setCapitals] = useState(usaCapitals);
   const [pathLayer, setPathLayer] = useState();
@@ -39,7 +41,6 @@ function TspVisualiser() {
   const [distance, setDistance] = useState(0);
   const [pathAnimation, setPathAnimation] = useState(nearestNeighbour(capitals));
   const [algo, setAlgo] = useState(TSP.NEAREST_NEIGHBOUR);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/streets-v11'); // Default style
 
   const setters = {
@@ -77,6 +78,9 @@ function TspVisualiser() {
       case TSP.TWO_OPT:
         setPathAnimation(twoOpt(capitals));
         break;
+      case TSP.BACKTRACKING:
+        setPathAnimation(tspBacktracking(capitals));
+        break;
       default:
         break;
     }
@@ -86,7 +90,7 @@ function TspVisualiser() {
     const layer = getCapitalsGeoJSON({
       ...capitals,
       features: capitals.features.filter(
-        (city) => city.properties.capital !== pathAnimation?.[0]?.[0].properties.capital,
+        (city) => city.properties.capital !== pathAnimation?.[0]?.[0]?.properties?.capital,
       ),
     });
 
@@ -107,7 +111,9 @@ function TspVisualiser() {
               color: [101, 147, 245],
               path: pathAnimation[timestamp].reduce(
                 (accumulator, currentValue) => {
-                  accumulator?.push(currentValue.geometry.coordinates);
+                  if (currentValue && currentValue.geometry && currentValue.geometry.coordinates) {
+                    accumulator.push(currentValue.geometry.coordinates);
+                  }
                   return accumulator;
                 },
                 [],
@@ -126,14 +132,14 @@ function TspVisualiser() {
           },
         }),
       );
-
+  
       const myDistance = totalPathCost(pathAnimation[timestamp]);
-
+  
       setTimestamp(timestamp + 1);
       setDistance(myDistance);
     }
   }, delay || null);
-
+  
   const startingPointLayer = getStartingPointLayer({
     type: 'FeatureCollection',
     features: [pathAnimation?.[0]?.[0]],
@@ -169,7 +175,7 @@ function TspVisualiser() {
       <AlgoInfoModal
         isOpen={isOpen}
         onClose={onClose}
-        algo={algo}
+        algo={TSP[algo]}
       />
 
       <Header
@@ -184,4 +190,4 @@ function TspVisualiser() {
   );
 }
 
-export default TspVisualiser;
+export default TspVisualizer;

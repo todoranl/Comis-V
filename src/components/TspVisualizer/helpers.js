@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export function getDistanceFromCoords(pointACoords, pointBCoords) {
   const lat1 = pointACoords[1];
   const lon1 = pointACoords[0];
@@ -20,18 +18,33 @@ export function getDistanceFromCoords(pointACoords, pointBCoords) {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
   return (R * c) / 1000;
+}
 
-  // const lat1 = Math.abs(pointACoords[1]);
-  // const lon1 = Math.abs(pointACoords[0]);
-  // const lat2 = Math.abs(pointBCoords[1]);
-  // const lon2 = Math.abs(pointBCoords[0]);
+export function computeCost() {
+  // Implementare...
+}
 
-  // const a = 0.5
-  //   - Math.cos((lat2 - lat1) * pi) / 2
-  //   + (Math.cos(lat1 * pi)
-  //     * Math.cos(lat2 * pi)
-  //     * (1 - Math.cos((lon2 - lon1) * pi)))
-  //     / 2;
+export function getInsertionCost() {
+  // Implementare...
+}
 
-  // return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+export function totalPathCost(path) {
+  let totalCost = 0;
+
+  path.forEach((point, index) => {
+    if (index < path.length - 1 && point.geometry && point.geometry.coordinates) {
+      const currentPoint = point.geometry.coordinates;
+      const nextPoint = path[index + 1].geometry.coordinates;
+      totalCost += getDistanceFromCoords(currentPoint, nextPoint);
+    }
+  });
+
+  // Adaugă distanța de întoarcere la punctul de start
+  if (path.length > 1 && path[0].geometry && path[0].geometry.coordinates && path[path.length - 1].geometry && path[path.length - 1].geometry.coordinates) {
+    const startPoint = path[0].geometry.coordinates;
+    const endPoint = path[path.length - 1].geometry.coordinates;
+    totalCost += getDistanceFromCoords(endPoint, startPoint);
+  }
+
+  return totalCost;
 }
